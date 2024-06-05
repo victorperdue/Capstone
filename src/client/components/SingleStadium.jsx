@@ -36,13 +36,11 @@ export default function SingleStadium() {
 	const [newComment, setComment] = useState({});
 const token = window.sessionStorage.getItem('token');
 
-
-console.log(token);
 	useEffect(() => {
 		async function getSingleStadium(stadiumId) {
 			try {
 				const response = await fetch(
-					`http://localhost:3000/api/stadiums/${stadiumId}`
+					`/api/stadiums/${stadiumId}`
 				);
 				const result = await response.json();
 				setStadium(result.stadium);
@@ -62,7 +60,7 @@ console.log(token);
 			}
 
 			const response = await fetch(
-				`http://localhost:3000/api/reviews/${reviewId}/comments`,
+				`/api/reviews/${reviewId}/comments`,
 				{
 					method: 'POST',
 					headers: {
@@ -75,7 +73,6 @@ console.log(token);
 				}
 			);
 			const result = await response.json();
-			console.log('Response:', result);
 			setStadium(result.stadium);
 			setComment('');
 		} catch (error) {
@@ -90,7 +87,7 @@ console.log(token);
 			if (!token) {
 				throw new Error('Not Authenticated');
 			}
-			const response = await fetch(`http://localhost:3000/api/stadiums/${id}`, {
+			const response = await fetch(`/api/stadiums/${id}`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -104,7 +101,6 @@ console.log(token);
 				}),
 			});
 			const result = await response.json();
-			console.log('Response:', result);
 			setStadium(result.stadium);
 			setReview('');
 			setNewFoodRating('');
@@ -266,8 +262,7 @@ console.log(token);
 											<h4
 												style={{ margin: 0, textAlign: 'left', color: 'blue' }}
 											>
-												{/* If IsLoggedIn() show this comments and rating panel,
-												else show Login to post reviews link{' '} */}
+												
 											</h4>
 											<InputTags />
 											<Grid container direction={'row'} spacing={5}>
